@@ -1,9 +1,7 @@
-objects = find ls tree
+all : grep
 
-all: $(objects)
+grep : grep.c 
+	gcc -g -Wall -Werror -Wvla -fsanitize=address grep.c -o grep
 
-$(objects): %: %.c
-	gcc -Wall -Werror -fsanitize=address -Wvla $^ -o $@
-
-clean:
-	rm -rf $(objects)
+clean : 
+	rm -rf grep 
