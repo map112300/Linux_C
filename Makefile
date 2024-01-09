@@ -1,7 +1,9 @@
-all : grep
+objects = find ls tree uniq sort greo
 
-grep : grep.c 
-	gcc -g -Wall -Werror -Wvla -fsanitize=address grep.c -o grep
+all: $(objects)
 
-clean : 
-	rm -rf grep 
+$(objects): %: %.c
+	gcc -Wall -Werror -fsanitize=address -Wvla $^ -o $@
+
+clean:
+	rm -rf $(objects)
